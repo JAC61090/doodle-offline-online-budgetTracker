@@ -41,3 +41,21 @@ self.addEventListener('activate', function(evt) {
   
     self.clients.claim();
 });
+
+// enable service worker to intercept network requests
+self.addEventListener('fetch', function (evt) {
+    if(evt.request.urlincludes('/api/')) {
+        evt.respondWith(
+            caches
+            .open(DATA_CACHE_NAME)
+            .then(cache =>
+                fetch(evt.request)
+                .then(response => {
+                    
+                }
+                )
+
+            )
+        )
+    }
+})
