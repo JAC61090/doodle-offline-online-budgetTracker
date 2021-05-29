@@ -8,3 +8,12 @@ request.onupgradeneeded = function(event) {
     db.createObjectStore('pending', { autoIncrement: true });
     store.clear();
 };
+
+request.onsuccess = function(event) {
+    db =event.target.result;
+
+    // check if app is online before reading from db
+    if(navigator.onLine) {
+        checkDatabase();
+    }
+};
