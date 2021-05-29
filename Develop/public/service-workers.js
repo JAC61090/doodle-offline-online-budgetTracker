@@ -12,7 +12,6 @@ const FILES_TO_CACHE = [
 const CACHE_NAME = 'static-cache-v2';
 const DATA_CACHE_NAME = 'data-cache-v1';
 
-
 self.addEventListener('install', function(evt) {
     evt.waitUntil(
       caches.open(CACHE_NAME).then(cache => {
@@ -51,11 +50,31 @@ self.addEventListener('fetch', function (evt) {
             .then(cache =>
                 fetch(evt.request)
                 .then(response => {
-                    
-                }
-                )
+                    if(response.status === 200) {
+                        cache.put(evt.requests.url, response.clone());
+                    }
 
+                    return response;
+                })
+                .catch(err =>
+                    cache.match(evt.request)
+                    )
             )
-        )
+            .catch(err => console.log(err))
+        );
+
+        return;
     }
-})
+
+    // shows files from cache, accesability offline
+    evt.respondWith(
+        caches
+        .open(CACHE_NAME)
+        .then(cache =>
+            cache
+            .match(evt.request)
+            .then(response => response || fetch(evt.request))
+            
+        )
+    );
+});

@@ -1,4 +1,4 @@
-# Unit 18 PWA Homework: Online/Offline Budget Trackers
+# doodle-Online-Offline-BudgetTracker
 
 Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
 
@@ -24,4 +24,9 @@ SO THAT my account balance is accurate when I am traveling
 Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
 
 - - -
+
+### Github 
+- JAC61090
+- https://github.com/JAC61090/doodle-offline-online-budgetTracker.git
+
 
