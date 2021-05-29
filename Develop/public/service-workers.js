@@ -23,21 +23,3 @@ self.addEventListener('install', function(evt) {
   
     self.skipWaiting();
 });
-
-// Activate the service worker and remove old data from the cache
-self.addEventListener('activate', function(evt) {
-    evt.waitUntil(
-      caches.keys().then(keyList =>
-        Promise.all(
-          keyList.map(key => {
-            if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-              console.log('Removing old cache data', key);
-              return caches.delete(key);
-            }
-          })
-        )
-      )
-    );
-  
-    self.clients.claim();
-});
